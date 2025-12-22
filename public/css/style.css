@@ -52,7 +52,7 @@ body {
 .container {
     width: 100%;
     max-width: 1000px;
-    height: 100vh;
+    height: 95vh;
     max-height: 900px;
     display: flex;
     flex-direction: column;
@@ -188,49 +188,17 @@ h1 {
 
 @keyframes glitchAnim1 {
     0% { clip: rect(42px, 9999px, 44px, 0); }
-    5% { clip: rect(12px, 9999px, 59px, 0); }
-    10% { clip: rect(48px, 9999px, 29px, 0); }
-    15% { clip: rect(42px, 9999px, 73px, 0); }
-    20% { clip: rect(63px, 9999px, 27px, 0); }
     25% { clip: rect(34px, 9999px, 55px, 0); }
-    30% { clip: rect(86px, 9999px, 73px, 0); }
-    35% { clip: rect(20px, 9999px, 20px, 0); }
-    40% { clip: rect(26px, 9999px, 60px, 0); }
-    45% { clip: rect(25px, 9999px, 66px, 0); }
     50% { clip: rect(57px, 9999px, 98px, 0); }
-    55% { clip: rect(5px, 9999px, 46px, 0); }
-    60% { clip: rect(82px, 9999px, 31px, 0); }
-    65% { clip: rect(54px, 9999px, 27px, 0); }
-    70% { clip: rect(28px, 9999px, 99px, 0); }
     75% { clip: rect(45px, 9999px, 69px, 0); }
-    80% { clip: rect(23px, 9999px, 85px, 0); }
-    85% { clip: rect(54px, 9999px, 84px, 0); }
-    90% { clip: rect(45px, 9999px, 47px, 0); }
-    95% { clip: rect(37px, 9999px, 20px, 0); }
     100% { clip: rect(4px, 9999px, 91px, 0); }
 }
 
 @keyframes glitchAnim2 {
     0% { clip: rect(65px, 9999px, 100px, 0); }
-    5% { clip: rect(52px, 9999px, 74px, 0); }
-    10% { clip: rect(79px, 9999px, 85px, 0); }
-    15% { clip: rect(75px, 9999px, 5px, 0); }
-    20% { clip: rect(67px, 9999px, 61px, 0); }
     25% { clip: rect(14px, 9999px, 79px, 0); }
-    30% { clip: rect(1px, 9999px, 66px, 0); }
-    35% { clip: rect(86px, 9999px, 30px, 0); }
-    40% { clip: rect(23px, 9999px, 98px, 0); }
-    45% { clip: rect(85px, 9999px, 72px, 0); }
     50% { clip: rect(71px, 9999px, 75px, 0); }
-    55% { clip: rect(2px, 9999px, 48px, 0); }
-    60% { clip: rect(30px, 9999px, 16px, 0); }
-    65% { clip: rect(59px, 9999px, 50px, 0); }
-    70% { clip: rect(41px, 9999px, 62px, 0); }
     75% { clip: rect(2px, 9999px, 82px, 0); }
-    80% { clip: rect(47px, 9999px, 73px, 0); }
-    85% { clip: rect(3px, 9999px, 27px, 0); }
-    90% { clip: rect(26px, 9999px, 55px, 0); }
-    95% { clip: rect(42px, 9999px, 97px, 0); }
     100% { clip: rect(38px, 9999px, 49px, 0); }
 }
 
@@ -252,6 +220,7 @@ h1 {
     border-bottom: 2px solid var(--border-color);
     position: relative;
     z-index: 2;
+    min-height: 0;
 }
 
 .chat-messages {
@@ -353,16 +322,17 @@ h1 {
 .message .text {
     padding: 16px 20px;
     border-radius: 20px;
-    background: #111111;
+    background: #1a1a1a;
     border: 1px solid #ff1111;
-    color: #ff8888; /* Mas bright para makita sa dark */
-    text-shadow: 0 0 8px rgba(255, 136, 136, 0.8); /* Glow para astig */
+    color: #ffcccc;
+    text-shadow: 0 0 8px rgba(255, 68, 68, 0.6);
     box-shadow: 
         0 5px 15px rgba(0, 0, 0, 0.6),
         0 0 20px rgba(255, 17, 17, 0.3);
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     line-height: 1.6;
     word-wrap: break-word;
+    position: relative;
 }
 
 .message .text::before {
@@ -380,22 +350,6 @@ h1 {
     left: 100%;
 }
 
-.message .text::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
-}
-
-.message:hover .text::after {
-    transform: scaleX(1);
-}
-
 .message.user .text {
     background: linear-gradient(135deg, #007AFF 0%, #0056b3 100%);
     color: white;
@@ -410,7 +364,8 @@ h1 {
     gap: 15px;
     align-items: center;
     position: relative;
-    z-index: 2;
+    z-index: 10;
+    flex-shrink: 0;
 }
 
 #userInput {
@@ -439,6 +394,11 @@ h1 {
     border-color: #ff3333;
 }
 
+#userInput:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 #sendBtn {
     padding: 18px 24px;
     background: linear-gradient(135deg, var(--accent-red) 0%, #cc0000 100%);
@@ -456,6 +416,7 @@ h1 {
         0 4px 15px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
+    z-index: 11;
 }
 
 #sendBtn::before {
@@ -488,6 +449,12 @@ h1 {
     transform: translateY(0);
 }
 
+#sendBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
 #sendBtn svg {
     width: 24px;
     height: 24px;
@@ -500,36 +467,6 @@ h1 {
 #sendBtn:hover svg {
     transform: translateX(3px);
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-}
-
-/* Particles effect on send button */
-#sendBtn::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 10%, transparent 10%);
-    background-size: 10% 10%;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-#sendBtn:active::after {
-    opacity: 1;
-    animation: particles 0.6s ease-out;
-}
-
-@keyframes particles {
-    0% {
-        background-size: 10% 10%;
-        opacity: 1;
-    }
-    100% {
-        background-size: 20% 20%;
-        opacity: 0;
-    }
 }
 
 .credit {
@@ -546,6 +483,7 @@ h1 {
     justify-content: center;
     gap: 10px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .credit::before {
@@ -644,8 +582,13 @@ h1 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+
     .container {
-        max-height: 95vh;
+        max-height: 98vh;
+        height: 98vh;
         border-radius: 20px;
         border-width: 2px;
     }
@@ -708,9 +651,16 @@ h1 {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+
     .container {
-        border-radius: 15px;
+        border-radius: 0;
         max-height: 100vh;
+        height: 100vh;
+        border-left: none;
+        border-right: none;
     }
 
     header {
@@ -745,25 +695,5 @@ h1 {
 
     .chat-messages {
         padding: 30px 40px;
-    }
-}
-
-/* Dark mode adjustments for better visibility */
-@media (prefers-color-scheme: dark) {
-    body {
-        background: #000;
-    }
-}
-
-/* Print styles */
-@media print {
-    .input-area,
-    .credit {
-        display: none;
-    }
-
-    .container {
-        border: none;
-        box-shadow: none;
     }
 }
