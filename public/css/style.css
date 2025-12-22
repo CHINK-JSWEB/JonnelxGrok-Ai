@@ -353,18 +353,16 @@ h1 {
 .message .text {
     padding: 16px 20px;
     border-radius: 20px;
-    background: var(--message-ai-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    background: #111111;
+    border: 1px solid #ff1111;
+    color: #ff8888; /* Mas bright para makita sa dark */
+    text-shadow: 0 0 8px rgba(255, 136, 136, 0.8); /* Glow para astig */
     box-shadow: 
         0 5px 15px rgba(0, 0, 0, 0.6),
-        0 0 20px rgba(255, 17, 17, 0.1);
-    font-size: clamp(0.95rem, 2vw, 1.1rem);
+        0 0 20px rgba(255, 17, 17, 0.3);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     line-height: 1.6;
     word-wrap: break-word;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
 .message .text::before {
@@ -399,12 +397,10 @@ h1 {
 }
 
 .message.user .text {
-    background: linear-gradient(135deg, var(--message-user-bg) 0%, #0056b3 100%);
+    background: linear-gradient(135deg, #007AFF 0%, #0056b3 100%);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0 5px 15px rgba(0, 0, 0, 0.6),
-        0 0 20px rgba(0, 122, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 8px rgba(0, 122, 255, 0.8);
 }
 
 .input-area {
